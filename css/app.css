@@ -23,11 +23,13 @@ body {
     font-family: 'Coda', cursive;
 }
 
+/* 容器和标题 */
+
 /*
-   display : flex 定义弹性盒子，下面的三行 CSS 代码才能使用
-   flex-direction 确立主轴
-   justify-content 定义了在当前行上，弹性项目沿主轴(在这里是X轴)如何排布
-   align-items 定义了在当前行上，弹性项目沿侧轴(在这里是Y轴)默认如何排布
+ * display : flex 定义弹性盒子，下面的三行 CSS 代码才能使用
+ * flex-direction 确立主轴
+ * justify-content 定义了在当前行上，弹性项目沿主轴(在这里是X轴)如何排布
+ * align-items 定义了在当前行上，弹性项目沿侧轴(在这里是Y轴)默认如何排布
  */
 .container {
     display: flex;
@@ -39,4 +41,30 @@ body {
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+}
+
+/*
+ * 记分板样式
+ */
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
 }
