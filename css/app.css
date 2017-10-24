@@ -80,7 +80,8 @@ h1 {
  * 牌样式
  */
 
- /*
+
+/*
   * 宽高
   * 背景色由绿到紫，颜色160度倾斜线性渐变
   * box-shadow 第一个参数调整左右偏移程度,这里是右边偏移 12px ,
@@ -88,6 +89,7 @@ h1 {
   *
   *
   */
+
 .deck {
   width: 660px;
   min-height: 680px;
@@ -103,31 +105,32 @@ h1 {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
-    background: #2e3d49;
-    font-size: 0;
-    color: #ffffff;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  height: 125px;
+  width: 125px;
+  background: #2e3d49;
+  font-size: 0;
+  color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
 .deck .card.open {
-    transform: rotateY(0);
-    background: #02b3e4;
-    cursor: default;
+  background: #02b3e4;
+  cursor: default;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+}
+
+.rotate {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 .deck .card.show {
-    font-size: 33px;
+  font-size: 33px;
 }
-
-/*.deck .card.match {
-    cursor: default;
-    background: #02ccba;
-    font-size: 33px;
-}*/

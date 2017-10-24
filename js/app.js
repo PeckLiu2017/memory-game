@@ -37,18 +37,7 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-// 点击总次数
-var count = 0;
 /* get card change its background and show it */
 $('.card').click(function get_card() {
-  $(this).addClass('open').addClass('show')
-  count_click()
+  $(this).addClass('open').addClass('rotate').addClass('show')
 })
-
-function count_increase() {
-  return count += 1;
-}
-
-function count_click() {
-  $('.moves').text(count_increase());
-}
