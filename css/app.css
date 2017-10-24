@@ -22,3 +22,21 @@ body {
     background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
+
+/*
+   display : flex 定义弹性盒子，下面的三行 CSS 代码才能使用
+   flex-direction 确立主轴
+   justify-content 定义了在当前行上，弹性项目沿主轴(在这里是X轴)如何排布
+   align-items 定义了在当前行上，弹性项目沿侧轴(在这里是Y轴)默认如何排布
+ */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
