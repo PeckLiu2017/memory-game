@@ -1,70 +1,125 @@
 /* border-box 的盒子模型中元素的宽高包括 padding 和 border */
+
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 
 /* 从父元素继承 box-sizing 属性,也就是 border-box */
-*,
-*::before,
-*::after {
-    box-sizing: inherit;
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+  background: #ffffff url('../img/geometry2.png');
+  /* Background pattern from Subtle Patterns */
+  font-family: 'Coda', cursive;
 }
+
 
 /* 容器和标题 */
+
 
 /*
  * display : flex 定义弹性盒子，下面的三行 CSS 代码才能使用
  * flex-direction 确立主轴
- * justify-content 定义了在当前行上，弹性项目沿主轴(在这里是X轴)如何排布
- * align-items 定义了在当前行上，弹性项目沿侧轴(在这里是Y轴)默认如何排布
+ * justify-content 定义了在当前行上，弹性项目沿主轴如何排布
+ * align-items 定义了在当前行上，弹性项目沿侧轴默认如何排布
  */
+
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
 }
+
 
 /*
  * 记分板样式
  */
+
 .score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
+  text-align: left;
+  width: 345px;
+  margin-bottom: 10px;
 }
 
 .score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  margin: 0 5px 0 0;
 }
 
 .score-panel .stars li {
-    list-style: none;
-    display: inline-block;
+  list-style: none;
+  display: inline-block;
 }
 
 .score-panel .restart {
-    float: right;
-    cursor: pointer;
+  float: right;
+  cursor: pointer;
 }
+
+
+/*
+ * 牌样式
+ */
+
+ /*
+  * 宽高
+  * 背景色由绿到紫，颜色160度倾斜线性渐变
+  * box-shadow 第一个参数调整左右偏移程度,这里是右边偏移 12px ,
+  * 第二个参数调整上下偏移程度,这里是下面偏移 15px, 第三个参数 20px 调整模糊程度,第四个参数上下左右全方位设置偏移,第五个参数是阴影的颜色
+  *
+  *
+  */
+.deck {
+  width: 660px;
+  min-height: 680px;
+  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 3em;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+
+
+
+/*.deck li{
+  list-style: none;
+  display: inline-block;
+}*/
