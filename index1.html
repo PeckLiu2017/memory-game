@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style media="screen">
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div id="clickme">
+      Click here
+    </div>
+    <ul style="position: relative; margin:30px">
+      <li style="height:183px;width:100px;display: inline;overflow:hidden;">
+        <img id="book1" class="book" src="https://img3.doubanio.com/lpic/s27061731.jpg" alt="" width="100" height="123" style="position: relative; margin:30px" />
+      </li>
+      <li style="height:183px;width:100px;display: inline;overflow:hidden;">
+        <img id="book2" class="book" src="https://img3.doubanio.com/lpic/s27061731.jpg" alt="" width="100" height="123" style="position: relative; margin:30px" />
+      </li>
+      <li style="height:183px;width:100px;display: inline;overflow:hidden;">
+        <img id="book3" class="book" src="https://img3.doubanio.com/lpic/s27061731.jpg" alt="" width="100" height="123" style="position: relative; margin:30px" />
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    $('#clickme').click(function() {
+      // $this = $($('.book')[0])
+      // $this = $('.book')
+      // $this = $('.book')
+      // $this.each(function () {
+      //   $(this).animate({ //1
+      //     left: '-=10',
+      //     width: '+=20',
+      //     height: '-=20'
+      //   }, 'fast', function() {
+      //     // Animation complete.
+      //     $(this).animate({ //2
+      //       left: '+=10',
+      //       width: '-=20',
+      //       height: '+=20'
+      //     }, 'fast', function() {
+      //       $(this).animate({ //3
+      //         left: '-=10',
+      //         width: '+=20',
+      //         height: '-=20'
+      //       }, 'fast', function() {
+      //         $(this).animate({
+      //           left: '+=10',
+      //           width: '-=20',
+      //           height: '+=20'
+      //         }, 'fast')
+      //       }); //3
+      //     }); //2
+      //   }); // 1
+      // })
+
+      $this1 = $('#book1')
+      $this2 = $('#book2')
+      $this1.animate({ //1
+        left: '-=10',
+        width: '+=20',
+        height: '-=20'
+      }, 'fast', function() {
+        // Animation complete.
+        $this1.animate({ //2
+          left: '+=10',
+          width: '-=20',
+          height: '+=20'
+        }, 'fast', function() {
+          $this1.animate({ //3
+            left: '-=10',
+            width: '+=20',
+            height: '-=20'
+          }, 'fast', function() {
+            $this1.animate({
+              left: '+=10',
+              width: '-=20',
+              height: '+=20'
+            }, 'fast')
+          }); //3
+        }); //2
+      }); // 1
+
+      $this2.animate({ //1
+        left: '-=10',
+        width: '+=20',
+        height: '-=20'
+      }, 'fast', function() {
+        // Animation complete.
+        $this2.animate({ //2
+          left: '+=10',
+          width: '-=20',
+          height: '+=20'
+        }, 'fast', function() {
+          $this2.animate({ //3
+            left: '-=10',
+            width: '+=20',
+            height: '-=20'
+          }, 'fast', function() {
+            $this2.animate({
+              left: '+=10',
+              width: '-=20',
+              height: '+=20'
+            }, 'fast')
+          }); //3
+        }); //2
+      }); // 1
+    });
+  </script>
+</body>
+
+</html>
