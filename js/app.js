@@ -117,22 +117,26 @@ function note_matched_items() {
   $this2 = $($('.fa-diamond')[1]).parent()
   $this1.animate({ //1
     left: '-=20',
+    top: '+=20',
     width: '+=50',
     height: '-=50'
   }, 'fast', function() {
     // Animation complete.
     $this1.animate({ //2
       left: '+=20',
+      top: '-=20',
       width: '-=50',
       height: '+=50'
     }, 'fast', function() {
       $this1.animate({ //3
         left: '-=20',
+        top: '+=20',
         width: '+=50',
         height: '-=50'
       }, 'fast', function() {
         $this1.animate({
           left: '+=20',
+          top: '-=20',
           width: '-=50',
           height: '+=50'
         }, 'fast')
