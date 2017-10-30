@@ -154,10 +154,10 @@ h1 {
   cursor: default;
   background: #02ccba;
   font-size: 100%;
-  animation:mymove .5s 1;
+  animation:matched .5s 1;
 }
 
-@keyframes mymove {
+@keyframes matched {
   0%   {left:0px;top:0px;width:125px;height:125px;font-size: 100%;}
   20%   {left:-10px;top:10px;width:145px;height:105px;font-size: 80%;}
   40%  {left:10px;top:-10px;width:105px;height:145px;font-size: 100%;}
@@ -167,13 +167,40 @@ h1 {
 
 
 
-
-.deck .card.wrong {
+.deck .card.dismatch {
   cursor: default;
   background: red;
   font-size: 33px;
-  animation: .8s shake infinite;
-  animation-iteration-count: 1;
-  -webkit-animation-iteration-count: 1;
-  /* Safari 和 Chrome */
+  animation: dismatched .5s 1;
+  -moz-animation: dismatched 5s 1;
+  -webkit-animation: dismatched .5s 1;
+  -o-animation: dismatched 5s 1;
+}
+
+@keyframes dismatched {
+  0% {
+      transform: rotate(0deg);
+      left: 0px;
+  }
+  15% {
+      left: -40px;
+  }
+  30% {
+      transform: rotate(-10deg);
+  }
+  31% {
+      left: -39px;
+  }
+  60% {
+      left: 30px;
+      transform: rotate(6deg);
+  }
+  80% {
+      transform: rotate(-3deg);
+      left: -25px;
+  }
+  100% {
+      transform: rotate(0deg);
+      left: 0px;
+  }
 }
