@@ -3,31 +3,45 @@ $(document).ready(function () {
   var matched_items = [];
   // set up the event listener for a card. If a card is clicked:
   $('.card').on('click',function () {
-    // display the card's symbol (put this functionality in another function that you call from this one)
-    displayCard($this)
-  })
-  $('.card').click(function() {
-    $this = $(this)
-    displayCard($this)
+    $this = $(this);
+    // 防止第二次点击
+    lockCard($this);
+    // add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+    clicked_items.push($this)
 
-    clicked_items.push($this.children())
-    // console.log(clicked_items);
-    if (clicked_items.length % 2 == 0) {
-      if ($this.children().attr('class') === clicked_items[clicked_items.length - 2].attr('class')) {
-        note_matched_items.call($(document))
-
-      } else {
-        $('.show').addClass('wrong')
-        // restart_from_zero()
-      }
+    if (clicked_items.length % 2 != 0) {
+      // display the card's symbol (put this functionality in another function that you call from this one)
+      displayCard($this);
+    }else {
+      checkMatch($this);
     }
+
+
   })
 
   function displayCard($this) {
-    clicked_items.push($this)
-    $this.children().addClass('open').addClass('rotate').addClass('show')
-    // 还要lock以避免重复点击
+      $this.addClass('open').addClass('show')
+  }
+
+  // 防止第二次点击
+  function lockCard($this) {
     $this.toggleClass( 'disable' );
+  }
+
+  function checkMatch($this) {
+    console.log(clicked_items[clicked_items.length-2]);
+    console.log($this.children().attr('class'));
+    console.log(clicked_items[clicked_items.length-2].children().attr('class'));
+    console.log($this.children().attr('class') == clicked_items[clicked_items.length-2].children().attr('class'));
+    if ($this.children().attr('class') == clicked_items[clicked_items.length-2].children().attr('class')) {
+      $.each(clicked_items,function () {
+        $(this).removeClass('open').removeClass('show')
+        $(this).css({"background-color":"transparent",'font-size':'33px'})
+        $(this).children().addClass('match')
+        console.log($(this));
+
+      })
+    }
   }
 
   var note_matched_items = function () {
