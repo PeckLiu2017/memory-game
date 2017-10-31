@@ -5,108 +5,130 @@
   <meta charset="utf-8">
   <title></title>
   <style media="screen">
-    /*This is just styling for this demo*/
+    /* some modifications*/
+
     body {
       padding: 5em;
       text-align: center;
     }
 
-    h1 {
-      margin-bottom: 1em;
+    h2 {
+      margin-top: 0.8em;
+      margin-bottom: 0.6em;
     }
 
-.circle-loader {
-  margin: 0 0 30px 10px;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  border-left-color: #5cb85c;
-  animation-name: loader-spin;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-}
+    h4 {
+      margin-top: 0.2em;
+      font-weight: 300;
+    }
 
-.circle-loader,
-.circle-loader:after {
-  border-radius: 50%;
-  width: 8em;
-  height: 8em;
-}
+    .circle-loader {
+      margin: 0 0 30px 10px;
+      border: 3px solid rgba(0, 0, 0, 0.2);
+      border-left-color: #5cb85c;
+      animation-name: loader-spin;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+    }
 
-.load-complete {
-  -webkit-animation: none;
-  animation: none;
-  border-color: #5cb85c;
-  transition: border 500ms ease-out;
-}
+    .circle-loader,
+    .circle-loader:after {
+      border-radius: 50%;
+      width: 8em;
+      height: 8em;
+    }
 
-.checkmark {
-  display: none;
-}
+    .load-complete {
+      -webkit-animation: none;
+      animation: none;
+      border-color: #d7d7d7;
+    }
 
-.checkmark.draw:after {
-  animation-duration: 800ms;
-  animation-timing-function: ease;
-  animation-name: checkmark;
-  transform: scaleX(-1) rotate(135deg);
-}
+    .checkmark {
+      display: none;
+    }
 
-.checkmark:after {
-  opacity: 1;
-  height: 4em;
-  width: 2em;
-  transform-origin: left top;
-  border-right: 2px solid #5cb85c;
-  border-top: 2px solid #5cb85c;
-  content: '';
-  left: 2em;
-  top: 4em;
-  position: absolute;
-}
+    .checkmark.draw:after {
+      animation-duration: 1800ms;
+      animation-timing-function: ease;
+      animation-name: checkmark;
+      transform: scaleX(-1) rotate(135deg);
+    }
 
-@keyframes loader-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+    .checkmark:after {
+      opacity: 1;
+      height: 66px;
+      width: 28px;
+      transform-origin: left top;
+      border-right: 6px solid #5cb85c;
+      border-top: 6px solid #5cb85c;
+      content: '';
+      left: 28px;
+      top: 64px;
+      position: absolute;
+    }
 
-@keyframes checkmark {
-  0% {
-    height: 0;
-    width: 0;
-    opacity: 1;
-  }
-  20% {
-    height: 0;
-    width: 2em;
-    opacity: 1;
-  }
-  40% {
-    height: 4em;
-    width: 2em;
-    opacity: 1;
-  }
-  100% {
-    height: 4em;
-    width: 2em;
-    opacity: 1;
-  }
-}
+    .btn-again {
+      padding: 12px 36px;
+      background: #15d3e6;
+      color: white;
+      font-weight: 400;
+      letter-spacing: 1px;
+      font-size: 15px;
+    }
+
+    @keyframes loader-spin {
+      0% {
+        transform: rotate(180deg);
+      }
+      100% {
+        transform: rotate(50deg);
+      }
+    }
+
+    @keyframes checkmark {
+      0% {
+        left: 0;
+        top: 40px;
+        height: 0;
+        width: 0;
+        opacity: 1;
+      }
+      20% {
+        left: 0;
+        top: 40px;
+        height: 0;
+        width: 64px;
+        opacity: 1;
+      }
+      40% {
+        left: 0;
+        top: 40px;
+        height: 64px;
+        width: 64px;
+        opacity: 1;
+      }
+      100% {
+        height: 64px;
+        width: 28px;
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <h1>Circle loader with checkmark completed state <small>CSS Animation</small></h1>
-
   <div class="circle-loader">
     <div class="checkmark draw"></div>
   </div>
-  <p><button id="toggle" type="button" class="btn btn-success">Toggle Completed</button></p>
+  <h2>Congratulation! You Won!</h2>
+  <h4>With 17 Moves and 1 Stars.</h4>
+  <h4>Woooooo!</h4>
+  <p><button id="toggle" type="button" class="btn btn-again">Play again!</button></p>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
   <script type="text/javascript">
     $('#toggle').click(function() {

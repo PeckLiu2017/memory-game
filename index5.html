@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+     :root {
+      --bg: #3498db;
+      --checkmark: #2ecc71;
+      --cross: #F44336;
+      --btn: #FFDE49;
+
+      --time: 1s;
+    }
+
+    body {
+      display: flex;
+      margin: 0;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: var(--bg);
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    #btn {
+      min-width: 250px;
+      min-height: 250px;
+      border-radius: 100%;
+      background: var(--btn);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+    }
+
+    #icon {
+      font-size: 0;
+      transform: rotate(225deg);
+      transition: margin var(--time) ease;
+      margin-top: 30px;
+      filter: drop-shadow(-3px -3px 3px rgba(0, 0, 0, .8));
+    }
+
+    #icon:before {
+      content: '';
+      display: inline-block;
+      width: 140px;
+      height: 20px;
+      background: var(--cross);
+      transition: all var(--time) ease;
+      position: absolute;
+      margin-left: -60px;
+      transform: rotate(180deg);
+      border-radius: 50px;
+    }
+
+    #icon:after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 140px;
+      background: var(--cross);
+      transition: all var(--time) ease;
+      position: absolute;
+      margin-top: -60px;
+      transform: rotate(360deg);
+      border-radius: 50px;
+    }
+
+    #icon.checked {
+      margin-right: 50px;
+      margin-top: 110px;
+    }
+
+    #icon.checked:before {
+      content: '';
+      display: inline-block;
+      background: var(--checkmark);
+      transform: rotate(0);
+      width: 70px;
+      height: 20px;
+      margin: 0;
+    }
+
+    #icon.checked:after {
+      content: '';
+      display: inline-block;
+      background: var(--checkmark);
+      width: 20px;
+      height: 140px;
+      margin: 0;
+      transform: rotate(0);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Click me!</h1>
+  <div id="btn">
+    <div class="checked" id="icon"></div>
+  </div>
+  <script type="text/javascript">
+    var icon = document.querySelector('#icon');
+    btn.addEventListener(
+      'click',
+      function() {
+        icon.classList.toggle('checked');
+      }
+    );
+  </script>
+</body>
+
+</html>
