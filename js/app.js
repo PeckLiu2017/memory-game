@@ -41,8 +41,19 @@ $(document).ready(function () {
       // if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
       $.each(clicked_items,function () {
         $(this).removeClass('open').removeClass('show').removeClass('disable')
-        $(this).css({"background-color":"red",'font-size':'33px'})
-        $(this).addClass('dismatch')
+        //
+        $(this).addClass('mismatch')
+        // .queue(function(next) {
+        //   $(this).removeClass('mismatch')
+        //   next();
+        // })
+          // .animate({
+          //   background: '#2e3d49',
+          //   fontSize:'0px'
+          // },'fast')
+          // .removeClass('mismatch')
+        // $(this).css({'font-size':'33px'})
+        // $(this).css({'font-size':'33px'})
       })
     }
   }

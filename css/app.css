@@ -166,21 +166,21 @@ h1 {
 }
 
 
-
-.deck .card.dismatch {
+/*前后两个元素不匹配时背景变为红色并增加左右倾斜摇摆动画*/
+.deck .card.mismatch {
   cursor: default;
-  background: red;
-  font-size: 33px;
-  animation: dismatched .5s 1;
-  -moz-animation: dismatched 5s 1;
-  -webkit-animation: dismatched .5s 1;
-  -o-animation: dismatched 5s 1;
+  animation: mismatched .5s 1;
+  -moz-animation: mismatched 5s 1;
+  -webkit-animation: mismatched .5s 1;
+  -o-animation: mismatched 5s 1;
 }
 
-@keyframes dismatched {
+@keyframes mismatched {
   0% {
       transform: rotate(0deg);
       left: 0px;
+      font-size: 33px;
+      background: red;
   }
   15% {
       left: -40px;
@@ -199,8 +199,20 @@ h1 {
       transform: rotate(-3deg);
       left: -25px;
   }
-  100% {
+  90% {
       transform: rotate(0deg);
       left: 0px;
   }
+  91% {
+      background: #2e3d49;
+      font-size: 0;
+  }
+  /*100%{
+    background: #2e3d49;
+    font-size: 0;
+  }*/
+}
+.close{
+  font-size: 0;
+  background: #2e3d49;
 }
