@@ -14,9 +14,13 @@ $(document).ready(function () {
       displayCard($this);
     }else {
       checkMatch($this);
+      if (clicked_items.length == 2) {
+        setTimeout(function (){
+          $('#playing').css('display','none')
+          $('#success').css('display','block')
+        }, 1000);
+      }
     }
-
-
   })
 
   function displayCard($this) {
