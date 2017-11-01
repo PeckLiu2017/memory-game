@@ -1,6 +1,36 @@
 $(document).ready(function () {
+  // 所有的牌
+  array = [
+    'fa fa-diamond','fa fa-paper-plane-o','fa fa-anchor','fa fa-bolt',
+    'fa fa-cube','fa fa-anchor','fa fa-leaf','fa fa-bicycle',
+    'fa fa-diamond','fa fa-bomb','fa fa-leaf','fa fa-bomb',
+    'fa fa-bolt','fa fa-bicycle','fa fa-paper-plane-o','fa fa-cube'
+  ]
+  // 洗牌函数,每一次将数组中的随机数与 array[currentIndex] 交换以打乱牌的顺序
+  function shuffle(array) {
+    var currentIndex = array.length,
+      temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+  // 进行洗牌
+  shuffle(array);
+  // 将牌的内容填充到页面的对应位置中
+  cards = $('.card');
+  $.each(cards,function (index,value) {
+    $($('.card')[index]).find('i').attr('class',array[index]);
+  });
+
   var clicked_items = [];
-  var matched_items = [];
+  var matched_items = 0;
   // set up the event listener for a card. If a card is clicked:
   $('.card').on('click',function () {
     $this = $(this);
@@ -14,7 +44,10 @@ $(document).ready(function () {
       displayCard($this);
     }else {
       checkMatch($this);
-      if (clicked_items.length == 2) {
+      console.log('-----------');
+      console.log(matched_items);
+      // 如果匹配成功的数目达到 16 就显示游戏胜利
+      if (matched_items == 16) {
         setTimeout(function (){
           $('#playing').css('display','none')
           $('#success').css('display','block')
@@ -41,12 +74,16 @@ $(document).ready(function () {
         $(this).css({"background-color":"transparent",'font-size':'33px'})
         $(this).children().addClass('match')
       })
+      // 如果匹配成功,就将匹配成功的数目加 2
+      matched_items += 2;
     } else {
       // if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
       $.each(clicked_items,function () {
         $(this).removeClass('open').removeClass('show').removeClass('disable')
         //
         $(this).addClass('mismatch')
+        clicked_items.pop($(this));
+        console.log(clicked_items);
         // .queue(function(next) {
         //   $(this).removeClass('mismatch')
         //   next();

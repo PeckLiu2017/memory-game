@@ -47,6 +47,17 @@ h1 {
   font-weight: 300;
 }
 
+h2 {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin-top: 0.8em;
+  margin-bottom: 0.6em;
+}
+
+h4 {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin-top: 0.2em;
+  font-weight: 300;
+}
 
 /*
  * 记分板样式
@@ -108,7 +119,7 @@ h1 {
   position: relative;
   height: 125px;
   width: 125px;
-  font-size: 0;
+  font-size: 33px;
   border-radius: 8px;
   background: #2e3d49;
   cursor: pointer;
