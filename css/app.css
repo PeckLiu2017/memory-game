@@ -72,6 +72,13 @@ h4 {
   margin: 0 5px 0 0;
 }
 
+.time-wraper {
+  margin-left: 5%;
+}
+
+.showtime {
+  margin-left: 2%;
+}
 .score-panel .stars li {
   list-style: none;
   display: inline-block;
@@ -267,27 +274,25 @@ h4 {
 }*/
 
 .circle-loader {
-  /* 设置放对号的容器宽高并把它变成圆环 */
-  width: 70px;
-  height: 70px;
-  border-radius: 100%;
-  /* 内部对齐方式 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0 30px;
+  margin: 0 0 30px 10px;
   border: 4px solid rgba(208, 232, 221, 0.88);
   border-left-color: #5cb85c;
-  animation: loader-spin 1s linear infinite;
+  animation-name: loader-spin;
+  animation-duration: .5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
   position: relative;
+  display: inline-block;
+  vertical-align: top;
 }
 
-.load-complete {
-  /*animation: none;*/
-  /*border-color: rgba(208, 232, 221, 0.88);*/
+.circle-loader
+ {
+  border-radius: 50%;
+  width: 8em;
+  height: 8em;
 }
 
-/* 圆环上的动画 */
 @keyframes loader-spin {
   0% {
     transform: rotate(180deg);
@@ -297,7 +302,34 @@ h4 {
   }
 }
 
-/* 按钮 */
+.load-complete {
+  -webkit-animation: none;
+  animation: none;
+  border: 4px solid rgba(208, 232, 221, 0.88);
+}
+
+.checkmark {
+  display: none;
+}
+
+
+.checkmark:after {
+  animation-duration: 500ms;
+  animation-timing-function: ease;
+  animation-name: checkmark;
+  transform: scaleX(-1) rotate(135deg);
+  opacity: 1;
+  height: 66px;
+  width: 28px;
+  transform-origin: left top;
+  border-right: 6px solid #5cb85c;
+  border-top: 6px solid #5cb85c;
+  content: '';
+  left: 28px;
+  top: 64px;
+  position: absolute;
+}
+
 .btn-again {
   padding: 12px 36px;
   background: #15d3e6;
@@ -305,4 +337,33 @@ h4 {
   font-weight: 400;
   letter-spacing: 1px;
   font-size: 15px;
+}
+
+@keyframes checkmark {
+  0% {
+    left: 0;
+    top: 40px;
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    left: 0;
+    top: 40px;
+    height: 0;
+    width: 64px;
+    opacity: 1;
+  }
+  40% {
+    left: 0;
+    top: 40px;
+    height: 64px;
+    width: 64px;
+    opacity: 1;
+  }
+  100% {
+    height: 64px;
+    width: 28px;
+    opacity: 1;
+  }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Memory Game</title>
@@ -24,6 +25,12 @@
       </ul>
 
       <span class="moves">0</span> Moves
+
+      <span class="time-wraper">Time
+        <span class="showtime" id="minute">00</span> 
+        <span class="showtime" >:</span>
+        <span class="showtime" id="second">00 </span>
+      </span>
 
       <div class="restart">
         <i class="fa fa-repeat"></i>
@@ -84,10 +91,10 @@
 
   <div id="success" class="container" style="display:none;margin-top:10%;">
     <div class="circle-loader">
-      <div id="checkmark" class="draw"></div>
+      <div class="checkmark draw"></div>
     </div>
-    <h2>Congratulations! You Won!</h2>
-    <h4>With <span id="total-click"></span> Moves and 3 Stars.</h4>
+    <h2>Congratulation! You Won!</h2>
+    <h4>With <span id="score"></span> Moves and 3 Stars.</h4>
     <h4>Woooooo!</h4>
     <p><button id="play-again" type="button" class="btn btn-again">Play again!</button></p>
   </div>
