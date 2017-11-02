@@ -121,4 +121,10 @@ $(document).ready(function () {
     $('#success').css('display','none');
   })
 
+  // 点击 restart 按钮重新洗牌发牌
+  $('.restart').on('click',function () {
+    shuffle(array);
+    licensing();
+  })
+
 })
