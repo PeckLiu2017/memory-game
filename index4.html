@@ -177,12 +177,12 @@
       /* 为了增强从对号到错号的动画效果 */
       /*transform: rotate(360deg);*/
       border-radius: 50px;
-      /*animation: checkmark-before 1s linear infinite;*/
+      animation: checkmark-before 1s linear 1;
     }
 
     @keyframes checkmark-before {
       0% {
-        width: 0px;
+        width: 6px;
         height: 0px;
       }
       100% {
@@ -206,7 +206,7 @@
       /* 通过 margin 控制位置 */
       margin: -16px 0 0 0px;
       /* 为了增强从对号到错号的动画效果 */
-      /*transform: rotate(360deg);*/
+      transform: rotate(360deg);
       border-radius: 50px;
     }
 
@@ -235,7 +235,7 @@
       height: 6px;
       margin: -16px 0 0 0;
       transform: rotate(0);*/
-      transform-origin: right bottom;
+      transform-origin: left bottom;
       animation: checkmark-after 1s linear 1  backwards;
     }
 

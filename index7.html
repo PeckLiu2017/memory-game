@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .div1{
+        width: 0px;
+        height: 300px;
+        position: absolute;
+        top: 100px;
+        left: 500px;
+        right: 300px;
+        background: skyblue;
+        transform: rotate(313deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div1">
+
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function () {
+      $('.div1')
+      .animate({
+        // transform 在这里好像不能用
+        position: 'absolute',
+        width:'600',
+      },1000)
+      .queue(function (next) {
+        $('.div1').css({
+          transition:'transform 1000ms linear',
+          transform: 'scaleX(0.5)',
+          transformOrigin:'100% 100%',
+        });
+       next();
+       })
+    })
+    </script>
+  </body>
+</html>
