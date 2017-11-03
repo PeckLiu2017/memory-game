@@ -36,34 +36,30 @@ $(document).ready(function() {
   var clicked_items = [];
   var matched_items = [];
 
-  var m = 0,
+  var Timer = '',
+    m = 0,
     h = 0,
     s = 1,
     timerDisplay = '';
 
-    // 计算星级
-    function getStar() {
-      // $time = parseInt($('#minute').text()) * 60 + parseInt($('#second').text());
-      $time = s;
-      if ($time > 0 && $time <= 15) {
-        $('#final-stars').text('3');
-      } else if ($time > 15 && $time <= 30) {
-        $('#final-stars').text('2');
-        $('.stars').children('li').eq(2).children('i').attr('class', 'fa fa-star-o');
-      } else if ($time > 30) {
-        $('#final-stars').text('1');
-        $('.stars').children('li').eq(2).children('i').attr('class', 'fa fa-star-o');
-        $('.stars').children('li').eq(1).children('i').attr('class', 'fa fa-star-o');
-      }
+  // 计算星级
+  function getStar() {
+    // $time = parseInt($('#minute').text()) * 60 + parseInt($('#second').text());
+    $time = s;
+    if ($time > 0 && $time <= 15) {
+      $('#final-stars').text('3');
+    } else if ($time > 15 && $time <= 30) {
+      $('#final-stars').text('2');
+      $('.stars').children('li').eq(2).children('i').attr('class', 'fa fa-star-o');
+    } else if ($time > 30) {
+      $('#final-stars').text('1');
+      $('.stars').children('li').eq(2).children('i').attr('class', 'fa fa-star-o');
+      $('.stars').children('li').eq(1).children('i').attr('class', 'fa fa-star-o');
     }
+  }
 
-    // 重置计时器
-    function resetTimer() {
-      clearInterval(Timer);
-      $('#timer').text('00:00');
-    }
-
-    // 玩家点击第一张牌游戏即开始，然后计时器计时
+  // 玩家点击第一张牌游戏即开始，然后计时器计时
+  function startTimer() {
     Timer = setInterval(function() {
       if (s > 0 && (s % 60) == 0) {
         m += 1;
@@ -93,8 +89,25 @@ $(document).ready(function() {
       s += 1;
       getStar();
     }, 1000);
+  }
+
+  // 停止计时
+  function stopTimer() {
+    console.log(Timer);
+    clearInterval(Timer);
+  }
+
+  // 重置计时器
+  function resetTimer() {
+    stopTimer();
+    $('#timer').text('00:00');
+  }
+
   // set up the event listener for a card. If a card is clicked:
   $('.card').on('click', function() {
+    if ($('.moves').text() == '0') {
+      startTimer();
+    }
 
     $this = $(this);
     // 点击一次就增加一次点击次数
@@ -119,6 +132,8 @@ $(document).ready(function() {
           $('#success').css('display', 'flex');
           $('#final-moves').text(count);
           getStar();
+          console.log('ooo');
+          stopTimer();
           resetTimer();
           setTimeout(function() {
             $('.circle-loader').toggleClass('load-complete');
