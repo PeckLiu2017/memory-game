@@ -2,15 +2,15 @@ $(document).ready(function() {
   /**
    * @description 这是将要用到的全局变量
    * @param {number} count 用来记录玩家一共走了多少步或者说点击了多少次卡片
-   * @param {array} clicked_items 上两次点击的卡片
-   * @param {array} matched_items 如果上两次点击的卡片相匹配,就把它们从 clicked_items 中取出来存进这里
+   * @param {array} clickedItems 上两次点击的卡片
+   * @param {array} matchedItems 如果上两次点击的卡片相匹配,就把它们从 clickedItems 中取出来存进这里
    * @param {string} timer 这个 timer 在接下来的开始计时函数 startTimer
    * 和结束计时函数 stopTimer 中会作为 setInterval 返回的ID重新赋值和使用
    */
   let globeVariables = {
     count : 0,
-    clicked_items : [],
-    matched_items : [],
+    clickedItems : [],
+    matchedItems : [],
     timer : ''
   };
 
@@ -19,8 +19,8 @@ $(document).ready(function() {
    */
   function initialize() {
     globeVariables.count = 0;
-    globeVariables.clicked_items = [];
-    globeVariables.matched_items = [];
+    globeVariables.clickedItems = [];
+    globeVariables.matchedItems = [];
     globeVariables.timer = '';
   }
 
@@ -149,10 +149,9 @@ $(document).ready(function() {
    * totalClick 函数显示点击 moves 总次数
    * 如果卡片被翻过来,就用 lockCard 函数将它锁起来防止被第二次点击从而二次触发 JS 代码效果
    * 并将它加入已打开卡片列表
-   * 然后将已经翻转过来的卡片加入 globeVariables.clicked_items 数组
-   * 如果 globeVariables.clicked_items 数组元素个数为奇数,调用 displayCard 函数直接将卡片翻转过来
-   * 如果 globeVariables.clicked_items 数组元素个数为偶数,调用 checkMatch 函数查看这次翻转的卡片与上一张卡片是否匹配
-   * 调用 gamewin 查看游戏是否胜利
+   * 然后将已经翻转过来的卡片加入 globeVariables.clickedItems 数组
+   * 如果 globeVariables.clickedItems 数组元素个数为奇数,调用 displayCard 函数直接将卡片翻转过来
+   * 如果 globeVariables.clickedItems 数组元素个数为偶数,调用 checkMatch 函数查看这次翻转的卡片与上一张卡片是否匹配
    */
   $('.card').on('click', function() {
     if ($('.moves').text() == '0') {
@@ -163,11 +162,10 @@ $(document).ready(function() {
     totalClick();
     lockCard($this);
     storeOpenedCards($this);
-    if (globeVariables.clicked_items.length % 2 != 0) {
+    if (globeVariables.clickedItems.length % 2 != 0) {
       displayCard($this);
     } else {
       checkMatch($this);
-      gameWin();
     }
   })
 
@@ -196,7 +194,7 @@ $(document).ready(function() {
    * @description 如果卡片被翻过来,就将它加入已打开卡片列表
    */
   function storeOpenedCards($this) {
-    globeVariables.clicked_items.push($this);
+    globeVariables.clickedItems.push($this);
   }
 
   /**
@@ -208,13 +206,16 @@ $(document).ready(function() {
 
   /**
    * @description 查看这次翻转的卡片与上一张卡片是否匹配
-   * 如果两张卡片匹配,触发匹配的动画效果
-   * 并将匹配卡片加入 globeVariables.matched_items 数组中
+   * 在检查卡片期间先把屏幕锁住,不再接受点击事件,检查匹配动画完成后 500ms 解锁屏幕
+   * 检查规则:如果两张卡片匹配,触发匹配的动画效果
+   * 并将匹配卡片加入 globeVariables.matchedItems 数组中
+   * 调用 checkGameWin 查看游戏是否胜利
    * 否则触发不匹配的动画效果并将两张卡重新盖住
    */
   function checkMatch($this) {
-    if ($this.children().attr('class') == globeVariables.clicked_items[globeVariables.clicked_items.length - 2].children().attr('class')) {
-      $.each(globeVariables.clicked_items, function() {
+    $('.deck').toggleClass('disable');
+    if ($this.children().attr('class') == globeVariables.clickedItems[globeVariables.clickedItems.length - 2].children().attr('class')) {
+      $.each(globeVariables.clickedItems, function() {
         $(this).removeClass('open') //.removeClass('show')
         $(this).css({
           "background-color": "transparent",
@@ -224,37 +225,41 @@ $(document).ready(function() {
         $(this).children().addClass('match');
       })
       storeMatchedItems();
+      checkGameWin();
     } else {
-      $.each(globeVariables.clicked_items, function() {
+      $.each(globeVariables.clickedItems, function() {
         $(this).removeClass('open').removeClass('show').removeClass('disable')
         $(this).addClass('mismatch');
         setTimeout(function() {
-          $.each(globeVariables.clicked_items, function(i, v) {
+          $.each(globeVariables.clickedItems, function(i, v) {
             $(this).removeClass('mismatch')
-            globeVariables.clicked_items.splice(i, 1);
+            globeVariables.clickedItems.splice(i, 1);
           })
         }, 500);
       })
     }
+    setTimeout(function() {
+        $('.deck').toggleClass('disable');
+    }, 500);
   }
 
   /**
-   * @description 将互相匹配的卡片加入 globeVariables.matched_items 数组中
+   * @description 将互相匹配的卡片加入 globeVariables.matchedItems 数组中
    */
   function storeMatchedItems() {
-    globeVariables.matched_items.push(globeVariables.clicked_items.pop());
-    globeVariables.matched_items.push(globeVariables.clicked_items.pop());
+    globeVariables.matchedItems.push(globeVariables.clickedItems.pop());
+    globeVariables.matchedItems.push(globeVariables.clickedItems.pop());
   }
 
   /**
-   * @description 如果 matched_items 数组中匹配成功的数目达到 16 就表示游戏胜利
+   * @description 如果 matchedItems 数组中匹配成功的数目达到 16 就表示游戏胜利
    * 游戏面板隐藏,胜利面板出现
    * 调用 stopTimer 停止游戏计时
    * 显示胜利的动画效果
    * 显示游戏步数和游戏成绩星级
    */
-   function gameWin() {
-     if (globeVariables.matched_items.length == 16) {
+   function checkGameWin() {
+     if (globeVariables.matchedItems.length == 16) {
        setTimeout(function() {
          $('#playing').css('display', 'none');
          $('#success').css('display', 'flex');
@@ -287,7 +292,7 @@ $(document).ready(function() {
    */
   $('.restart').on('click', function() {
     resetTimer();
-    $('.card').removeClass().addClass('card').attr('style','');
+    $('.card').removeClass().addClass('card').removeAttr('style');
     $('.moves').text(0);
     buildGame();
   })
