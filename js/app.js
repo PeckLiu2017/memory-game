@@ -1,8 +1,35 @@
 $(document).ready(function() {
   /**
+   * @description 这是将要用到的全局变量
+   * @param {number} count 用来记录玩家一共走了多少步或者说点击了多少次卡片
+   * @param {array} clicked_items 上两次点击的卡片
+   * @param {array} matched_items 如果上两次点击的卡片相匹配,就把它们从 clicked_items 中取出来存进这里
+   * @param {string} timer 这个 timer 在接下来的开始计时函数 startTimer
+   * 和结束计时函数 stopTimer 中会作为 setInterval 返回的ID重新赋值和使用
+   */
+  let globeVariables = {
+    count : 0,
+    clicked_items : [],
+    matched_items : [],
+    timer : ''
+  };
+
+  /**
+   *  @description 每次创建或者重启游戏重新初始化全局变量,以防止上一局的游戏变量污染
+   */
+  function initialize() {
+    globeVariables.count = 0;
+    globeVariables.clicked_items = [];
+    globeVariables.matched_items = [];
+    globeVariables.timer = '';
+  }
+
+  /**
    *  @description 创建游戏，调用 shuffle(array) 对卡片洗牌,调用 licensing(array) 将卡片发到游戏面板的相应 html 位置上
    */
   function buildGame() {
+    initialize();
+
     let array = [
       'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt',
       'fa fa-cube', 'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle',
@@ -46,21 +73,6 @@ $(document).ready(function() {
   buildGame();
 
   /**
-   * @description 这是将要用到的全局变量
-   * @param {number} count 用来记录玩家一共走了多少步或者说点击了多少次卡片
-   * @param {array} clicked_items 上两次点击的卡片
-   * @param {array} matched_items 如果上两次点击的卡片相匹配,就把它们从 clicked_items 中取出来存进这里
-   * @param {string} timer 这个 timer 在接下来的开始计时函数 startTimer
-   * 和结束计时函数 stopTimer 中会作为 setInterval 返回的ID重新赋值和使用
-   */
-  let globeVariables = {
-    count : 0,
-    clicked_items : [],
-    matched_items : [],
-    timer : ''
-  };
-
-  /**
    * @description 玩家点击第一张牌游戏就开始，然后计时器计时
    * setInterval 函数使每一秒使计时器的结果都增加一秒
    * 如果秒数够 60 秒,就把它转换成分钟数,并把秒数清零
@@ -83,7 +95,6 @@ $(document).ready(function() {
       } else {
         second < 10 ? timerDisplay = (minute + ':' + '0' + second) : timerDisplay = (minute + ':' + second);
       }
-      console.log(timerDisplay);
       second += 1;
       showTime(timerDisplay);
       getStar(second);
@@ -243,7 +254,7 @@ $(document).ready(function() {
    * 显示游戏步数和游戏成绩星级
    */
    function gameWin() {
-     if (globeVariables.matched_items.length == 2) {
+     if (globeVariables.matched_items.length == 16) {
        setTimeout(function() {
          $('#playing').css('display', 'none');
          $('#success').css('display', 'flex');
@@ -269,15 +280,16 @@ $(document).ready(function() {
 
   /**
    * @description 重新开始一次游戏
-   * 所有卡片重新盖起来
-   * 清空游戏步数 moves 并重置计时器
+   * 先重置计时器
+   * 再把所有卡片重新盖起来,去除因打开卡片而增加的样式
+   * 清空游戏步数 moves
+   * 最后重新建立游戏
    */
   $('.restart').on('click', function() {
-    buildGame();
-    $('.card').removeClass().addClass('card')
-    $('.moves').text(0);
-    // 重置计时器
     resetTimer();
+    $('.card').removeClass().addClass('card').attr('style','');
+    $('.moves').text(0);
+    buildGame();
   })
 
 })
