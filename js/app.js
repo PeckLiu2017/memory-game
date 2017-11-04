@@ -270,8 +270,7 @@ $(document).ready(function() {
    * 显示游戏步数用时和游戏成绩星级
    */
    function checkGameWin() {
-    //  TODO:改回16
-     if (globeVariables.matchedItems.length == 4) {
+     if (globeVariables.matchedItems.length == 16) {
        setTimeout(function() {
          $('#playing').css('display', 'none');
          $('#success').css('display', 'flex');
