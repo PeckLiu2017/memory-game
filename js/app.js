@@ -42,6 +42,7 @@ $(document).ready(function() {
   }
 
   /**
+   *  来源: http://stackoverflow.com/a/2450976
    *  @description 洗牌函数,每一次运行都会将以随机数为索引的卡片与  array[currentIndex] 交换以将一组卡片的顺序打乱
    *  @param {array} array 一组卡片的内容组成的数组
    */
