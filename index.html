@@ -7,7 +7,6 @@
   <meta name="description" content="A Memory Game Created By HTML,CSS And Javascript">
   <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
   <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
-  <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/app.css">
 </head>
 
@@ -20,10 +19,8 @@
       <header>
         <h1>Memory Game</h1>
       </header>
-
       <!-- 记分板和重启按钮 -->
       <div class="score-panel">
-
         <ul class="stars">
           <li><i class="fa fa-star"></i></li>
           <li><i class="fa fa-star"></i></li>
@@ -34,7 +31,6 @@
         <span class="time-wraper">Time
         <span class="showtime" id="timer">00:00</span>
         </span>
-
       </div>
 
       <div class="restart">
@@ -44,7 +40,6 @@
 
 
     <div class="row">
-
       <!-- 放置卡片的 16 方格 -->
       <ul class="deck">
         <li class="card">
@@ -97,12 +92,10 @@
         </li>
       </ul>
     </div>
-
   </div>
 
   <!-- 游戏胜利的 html 设置 -->
   <div id="success" class="row" style="display:none;margin-top:10%;">
-    <!-- <div class="row"> -->
     <!-- 划对号的 html 设置 -->
     <div class="circle-loader">
       <div class="checkmark draw"></div>
@@ -113,7 +106,6 @@
     <h4>With <span id="final-moves"></span> Moves and <span id="final-stars"></span> Stars.</h4>
     <h4>Woooooo!</h4>
     <p><button id="play-again" type="button" class="btn btn-again">Play again!</button></p>
-    <!-- </div> -->
   </div>
 
   <!-- 使用 jQuery 库并载入自己的脚本 -->

@@ -11,6 +11,7 @@ $(document).ready(function() {
     count : 0,
     clickedItems : [],
     matchedItems : [],
+    moves : 0,
     timer : ''
   };
 
@@ -21,6 +22,7 @@ $(document).ready(function() {
     globeVariables.count = 0;
     globeVariables.clickedItems = [];
     globeVariables.matchedItems = [];
+    globeVariables.moves = 0;
     globeVariables.timer = '';
   }
 
@@ -146,7 +148,7 @@ $(document).ready(function() {
   /**
    * @description 监听卡片的单击事件
    * 如果在一盘游戏中第一次点击卡片,就调用 startTimer 函数开始计时,否则直接往下执行代码
-   * increaseCount 函数点击卡片一次就增加一次点击 moves 总次数
+   * increaseMoves 函数点击卡片一次就增加一次点击 moves 总次数
    * totalClick 函数显示点击 moves 总次数
    * 如果卡片被翻过来,就用 lockCard 函数将它锁起来防止被第二次点击从而二次触发 JS 代码效果
    * 并将它加入已打开卡片列表
@@ -155,7 +157,8 @@ $(document).ready(function() {
    * 如果 globeVariables.clickedItems 数组元素个数为偶数,调用 checkMatch 函数查看这次翻转的卡片与上一张卡片是否匹配
    */
   $('.card').on('click', function() {
-    if ($('.moves').text() == '0') {
+    globeVariables.count += 1;
+    if (globeVariables.count == 1 && globeVariables.moves == 0) {
       startTimer();
     }
     $this = $(this);
@@ -164,7 +167,7 @@ $(document).ready(function() {
     if (globeVariables.clickedItems.length % 2 != 0) {
       displayCard($this);
     } else {
-      increaseCount();
+      increaseMoves();
       totalClick();
       checkMatch($this);
     }
@@ -173,15 +176,15 @@ $(document).ready(function() {
   /**
    * @description 函数点击卡片一次就增加一次点击 moves 总次数
    */
-  function increaseCount() {
-    globeVariables.count += 1;
+  function increaseMoves() {
+    globeVariables.moves += 1;
   }
 
   /**
    * @description 显示点击 moves 总次数
    */
   function totalClick() {
-    $('.moves').text(globeVariables.count);
+    $('.moves').text(globeVariables.moves);
   }
 
   /**

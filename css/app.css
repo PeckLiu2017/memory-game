@@ -21,13 +21,21 @@ html, body {
  * 容器和标题
  * 弹性盒子
  */
+ .container {
+     padding-right: 15px;
+     padding-left: 15px;
+     margin-right: auto;
+     margin-left: auto;
+ }
 
-.container,
+/*.container,*/
 .row {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-right: -15px;
+  margin-left: -15px;
 }
 
 .col-md-3 {
@@ -337,6 +345,10 @@ h4 {
 
 /* 适应电脑等大屏幕 */
 @media screen and (max-width: 2000px) {
+   .container {
+    width: 920px;
+  }
+
    :root {
     --translateX-one: -40px;
     --translateX-two: 30px;
@@ -371,25 +383,29 @@ h4 {
 
 /* 适应平板屏幕 */
 @media screen and (max-width: 920px) {
+  .container {
+   width: 460px;
+  }
+
   h2 {
     font-size: 26px;
   }
 
    :root {
-    --translateX-one: -28px;
-    --translateX-two: 24px;
-    --translateX-three: -13px;
+    --translateX-one: -26px;
+    --translateX-two: 22px;
+    --translateX-three: -12px;
   }
 
   .deck {
-    width: 530px;
-    min-height: 530px;
-    padding: 32px;
+    width: 500px;
+    min-height: 500px;
+    padding: 28px;
   }
 
   .deck .card {
-    height: 94px;
-    width: 94px;
+    height: 90px;
+    width: 90px;
   }
 
   .deck .card.show {
@@ -401,14 +417,18 @@ h4 {
   }
 
   .deck .card i {
-    height: 94px;
-    width: 94px;
+    height: 90px;
+    width: 90px;
   }
 
 }
 
 /* 适应电智能手机屏幕 */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 460px) {
+  .container {
+   width: 225px;
+  }
+
   h2 {
     font-size: 20px;
   }
@@ -442,7 +462,7 @@ h4 {
   .deck .card.li-match {
     font-size: 11px;
   }
-  
+
   .deck .card i {
     height: 36px;
     width: 36px;
