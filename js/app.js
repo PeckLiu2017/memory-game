@@ -267,14 +267,16 @@ $(document).ready(function() {
    * 游戏面板隐藏,胜利面板出现
    * 调用 stopTimer 停止游戏计时
    * 显示胜利的动画效果
-   * 显示游戏步数和游戏成绩星级
+   * 显示游戏步数用时和游戏成绩星级
    */
    function checkGameWin() {
+    //  TODO:改回16
      if (globeVariables.matchedItems.length == 4) {
        setTimeout(function() {
          $('#playing').css('display', 'none');
          $('#success').css('display', 'flex');
          $('#final-moves').text(globeVariables.count);
+         $('#final-time').text($('#timer').text());
          stopTimer();
          setTimeout(function() {
            $('.circle-loader').toggleClass('load-complete');

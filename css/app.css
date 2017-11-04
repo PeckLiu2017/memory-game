@@ -100,7 +100,7 @@ h4 {
   align-items: center;
   margin: 0 0 3em;
 }
-
+/*TODO:font-size改回 0 */
 .deck .card {
   position: relative;
   height: 125px;
