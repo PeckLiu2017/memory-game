@@ -16,7 +16,6 @@ html, body {
   font-family: "Coda", cursive;
 }
 
-
 /*
  * 容器和标题
  * 弹性盒子
@@ -344,6 +343,7 @@ h4 {
 
 
 /* 适应电脑等大屏幕 */
+
 @media screen and (max-width: 2000px) {
    .container {
     width: 920px;
@@ -381,6 +381,7 @@ h4 {
 }
 
 /* 适应平板屏幕 */
+
 @media screen and (max-width: 920px) {
   .container {
    width: 460px;
@@ -423,6 +424,7 @@ h4 {
 }
 
 /* 适应电智能手机屏幕 */
+
 @media screen and (max-width: 460px) {
   .container {
    width: 225px;
