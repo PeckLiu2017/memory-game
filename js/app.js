@@ -159,13 +159,13 @@ $(document).ready(function() {
       startTimer();
     }
     $this = $(this);
-    increaseCount();
-    totalClick();
     lockCard($this);
     storeOpenedCards($this);
     if (globeVariables.clickedItems.length % 2 != 0) {
       displayCard($this);
     } else {
+      increaseCount();
+      totalClick();
       checkMatch($this);
     }
   })
@@ -292,8 +292,6 @@ $(document).ready(function() {
    */
   $('#play-again').on('click', function() {
     window.location.reload();
-    $('#playing').css('display', 'flex');
-    $('#success').css('display', 'none');
   })
 
   /**
@@ -304,10 +302,7 @@ $(document).ready(function() {
    * 最后重新建立游戏
    */
   $('.restart').on('click', function() {
-    resetTimer();
-    $('.card').removeClass().addClass('card').removeAttr('style');
-    $('.moves').text(0);
-    buildGame();
+    window.location.reload();
   })
 
 })
