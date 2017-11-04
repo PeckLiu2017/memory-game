@@ -206,41 +206,52 @@ $(document).ready(function() {
 
   /**
    * @description 查看这次翻转的卡片与上一张卡片是否匹配
-   * 在检查卡片期间先把屏幕锁住,不再接受点击事件,检查匹配动画完成后 500ms 解锁屏幕
-   * 检查规则:如果两张卡片匹配,触发匹配的动画效果
+   * 在检查卡片期间先把屏幕锁住,不再接受单击事件
+   * 检查规则:如果两张卡片匹配, matchProcess() 触发匹配的动画效果
    * 并将匹配卡片加入 globeVariables.matchedItems 数组中
    * 调用 checkGameWin 查看游戏是否胜利
    * 否则触发不匹配的动画效果并将两张卡重新盖住
+   * 否则 mismatchProcess() 触发不匹配的动画效果并将两张卡重新盖住
+   * 匹配检查完成后 500ms 解锁屏幕,接受单击事件
    */
   function checkMatch($this) {
     $('.deck').toggleClass('disable');
     if ($this.children().attr('class') == globeVariables.clickedItems[globeVariables.clickedItems.length - 2].children().attr('class')) {
-      $.each(globeVariables.clickedItems, function() {
-        $(this).removeClass('open') //.removeClass('show')
-        $(this).css({
-          "background-color": "transparent",
-          'font-size': '33px',
-          'transform': 'rotateY(180deg)'
-        })
-        $(this).children().addClass('match');
-      })
+      matchProcess();
       storeMatchedItems();
       checkGameWin();
     } else {
-      $.each(globeVariables.clickedItems, function() {
-        $(this).removeClass('open').removeClass('show').removeClass('disable')
-        $(this).addClass('mismatch');
-        setTimeout(function() {
-          $.each(globeVariables.clickedItems, function(i, v) {
-            $(this).removeClass('mismatch')
-            globeVariables.clickedItems.splice(i, 1);
-          })
-        }, 500);
-      })
+      mismatchProcess();
     }
     setTimeout(function() {
         $('.deck').toggleClass('disable');
     }, 500);
+  }
+
+  /**
+   * @description 卡片匹配的动画效果
+   */
+  function matchProcess() {
+    $.each(globeVariables.clickedItems, function() {
+      $(this).removeClass('open').addClass('li-match');
+      $(this).children().addClass('i-match');
+    })
+  }
+
+  /**
+   * @description 卡片不匹配的动画效果
+   */
+  function mismatchProcess() {
+    $.each(globeVariables.clickedItems, function() {
+      $(this).removeClass('open').removeClass('show').removeClass('disable')
+      $(this).addClass('mismatch');
+      setTimeout(function() {
+        $.each(globeVariables.clickedItems, function(i, v) {
+          $(this).removeClass('mismatch')
+          globeVariables.clickedItems.splice(i, 1);
+        })
+      }, 500);
+    })
   }
 
   /**
@@ -259,7 +270,7 @@ $(document).ready(function() {
    * 显示游戏步数和游戏成绩星级
    */
    function checkGameWin() {
-     if (globeVariables.matchedItems.length == 16) {
+     if (globeVariables.matchedItems.length == 4) {
        setTimeout(function() {
          $('#playing').css('display', 'none');
          $('#success').css('display', 'flex');

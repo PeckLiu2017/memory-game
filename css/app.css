@@ -1,10 +1,7 @@
-/* border-box 的盒子模型中元素的宽高包括 padding 和 border */
-
+@charset "utf-8";
 html {
   box-sizing: border-box;
 }
-
-/* 从父元素继承 box-sizing 属性,也就是 border-box */
 
 *, *::before, *::after {
   box-sizing: inherit;
@@ -15,20 +12,14 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: #ffffff url(../img/geometry2.png);
+  font-family: "Coda", cursive;
 }
 
-body {
-  background: #ffffff url('../img/geometry2.png');
-  font-family: 'Coda', cursive;
-}
-
-/* 容器和标题 */
 
 /*
- * display : flex 定义弹性盒子，下面的三行 CSS 代码才能使用
- * flex-direction 确立主轴
- * justify-content 定义了在当前行上，弹性项目沿主轴如何排布
- * align-items 定义了在当前行上，弹性项目沿侧轴默认如何排布
+ * 容器和标题
+ * 弹性盒子
  */
 
 .container {
@@ -39,21 +30,20 @@ body {
 }
 
 h1 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 300;
 }
 
 h2 {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  margin-top: 0.8em;
-  margin-bottom: 0.6em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h4 {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  margin-top: 0.2em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 3px;
   font-weight: 300;
 }
+
 
 /*
  * 记分板样式
@@ -79,6 +69,7 @@ h4 {
 .showtime {
   margin-left: 2%;
 }
+
 .score-panel .stars li {
   list-style: none;
   display: inline-block;
@@ -91,15 +82,10 @@ h4 {
 
 
 /*
- * 牌样式
+ * 16 格卡片容器样式
+ * 卡片样式
+ * 卡片图标
  */
-
-/*
-  * 宽高
-  * 背景色由绿到紫，颜色160度倾斜线性渐变
-  * box-shadow 第一个参数调整左右偏移程度,这里是右边偏移 12px ,
-  * 第二个参数调整上下偏移程度,这里是下面偏移 15px, 第三个参数 20px 调整模糊程度,第四个参数上下左右全方位设置偏移,第五个参数是阴影的颜色
-  */
 
 .deck {
   width: 660px;
@@ -124,13 +110,10 @@ h4 {
   background: #2e3d49;
   cursor: pointer;
   list-style: none;
-  /*overflow: hidden;*/
   transition: 0.6s;
-  transform-style: preserve-3d;
-
 }
 
-.deck .card i{
+.deck .card i {
   overflow: auto;
   color: #ffffff;
   position: absolute;
@@ -144,8 +127,10 @@ h4 {
 }
 
 
+/*
+ * javascript 事件的 css 设置
+ */
 
-/*一次点击之后禁止再次点击*/
 .disable {
   pointer-events: none;
 }
@@ -162,123 +147,100 @@ h4 {
   transform: rotateY(180deg);
 }
 
-.deck .card i.match {
+
+/* 前后两个元素匹配时增加的样式 */
+
+.deck .card.li-match {
+  background-color: transparent;
+  font-size: 33px;
+  transform: rotateY(180deg);
+}
+
+.deck .card i.i-match {
   cursor: default;
   background: #02ccba;
   font-size: 100%;
-  animation:matched .5s 1;
+  animation: matched 0.5s 1;
 }
+
+
+/* 前后两个元素匹配时的伸缩变色动画效果 */
 
 @keyframes matched {
-  0%   {left:0px;top:0px;width:125px;height:125px;font-size: 100%;}
-  20%   {left:-10px;top:10px;width:145px;height:105px;font-size: 80%;}
-  40%  {left:10px;top:-10px;width:105px;height:145px;font-size: 100%;}
-  60%  {left:-10px;top:10px;width:145px;height:105px;font-size: 80%;}
-  100% {left:10px;top:-10px;width:105px;height:145px;font-size: 100%;}
+  0% {
+    left: 0px;
+    top: 0px;
+    width: 125px;
+    height: 125px;
+    font-size: 100%;
+  }
+  20%, 60% {
+    left: -10px;
+    top: 10px;
+    width: 145px;
+    height: 105px;
+    font-size: 80%;
+  }
+  40%, 100% {
+    left: 10px;
+    top: -10px;
+    width: 105px;
+    height: 145px;
+    font-size: 100%;
+  }
 }
 
 
-/*前后两个元素不匹配时背景变为红色并增加左右倾斜摇摆动画*/
+/* 前后两个元素不匹配时增加的样式 */
+
 .deck .card.mismatch {
   cursor: default;
-  animation: mismatched .5s 1;
-  -moz-animation: mismatched .5s 1;
-  -webkit-animation: mismatched .5s 1;
-  -o-animation: mismatched .5s 1;
+  animation: mismatched 0.5s 1;
+  -moz-animation: mismatched 0.5s 1;
+  -webkit-animation: mismatched 0.5s 1;
+  -o-animation: mismatched 0.5s 1;
 }
 
+
+/* 前后两个元素不匹配时的倾斜摇摆变色动画效果 */
 
 @keyframes mismatched {
   0% {
-      transform: rotate(0deg);
-      left: 0px;
-      font-size: 33px;
-      background: red;
-  }
-  15% {
-      left: -40px;
-  }
-  30% {
-      transform: rotate(-10deg);
-  }
-  31% {
-      left: -39px;
-  }
-  60% {
-      left: 30px;
-      transform: rotate(6deg);
-  }
-  80% {
-      transform: rotate(-3deg);
-      left: -25px;
-  }
-  90% {
-      transform: rotate(0deg);
-      background: red;
-      left: 0px;
-  }
-  100% {
     font-size: 33px;
+    background: red;
   }
-}
-
-/*.deck .card.mismatch {
-  animation: swing 5s 3 ease, backward .5s .15s ease;
-  -webkit-animation: swing 5s 3 ease, backward .5s .15s ease;
-  animation-fill-mode: forwards;
-}
-
-@keyframes swing {
-  0% {
-    -webkit-transform: rotate(-8deg) translate(-30px, 0px);
-    transform: rotate(-10deg) translate(-30px, 0);
-    font-size: 33px;
-    background-color: red;
+  20% {
+    transform: rotate(-10deg) translate(-40px, 0px);
   }
-  25% {
-    -webkit-transform: rotate(-4deg) translate(-15px, 0);
-    transform: rotate(-5deg) translate(-15px, 0);
-    font-size: 33px;
-    background-color: red;
+  35% {
+    transform: rotate(6deg) translate(30px, 0px);
+  }
+  45% {
+    transform: rotate(-3deg) translate(-25px, 0px);
   }
   50% {
-    -webkit-transform: rotate(0) translate(0px, 0);
-    transform: rotate(0) translate(0px, 0);
+    transform: rotateY(0deg);
+    background: red;
     font-size: 33px;
-    background-color: red;
-  }
-  75% {
-    -webkit-transform: rotate(4deg) translate(15px, 0);
-    transform: rotate(5deg) translate(15px, 0);
-    font-size: 33px;
-    background-color: red;
-  }
-  100% {
-    -webkit-transform: rotate(8deg) translate(30px, 0);
-    transform: rotate(10deg) translate(30px, 0);
-    font-size: 33px;
-    background-color: red;
-  }
-}
-
-@keyframes backward {
-  0% {
-    transform: rotateY(0);
-    background: #2e3d49;
-    font-size: 0;
   }
   100% {
     transform: rotateY(180deg);
     background: #2e3d49;
   }
-}*/
+}
+
+
+/*
+ * 游戏胜利画面的圆环
+ * 在这里面设置划对号的动画
+ */
 
 .circle-loader {
   margin: 0 0 30px 10px;
   border: 4px solid rgba(208, 232, 221, 0.88);
   border-left-color: #5cb85c;
   animation-name: loader-spin;
-  animation-duration: .5s;
+  animation-duration: 0.5s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   position: relative;
@@ -286,12 +248,16 @@ h4 {
   vertical-align: top;
 }
 
-.circle-loader
- {
+.circle-loader {
   border-radius: 50%;
   width: 8em;
   height: 8em;
 }
+
+
+/*
+ * 圆环上的动画效果
+ */
 
 @keyframes loader-spin {
   0% {
@@ -302,16 +268,15 @@ h4 {
   }
 }
 
-.load-complete {
-  -webkit-animation: none;
-  animation: none;
-  border: 4px solid rgba(208, 232, 221, 0.88);
-}
+
+/* 开始时隐藏对号 */
 
 .checkmark {
   display: none;
 }
 
+
+/* 对号的 css 设置 */
 
 .checkmark:after {
   animation-duration: 500ms;
@@ -330,14 +295,10 @@ h4 {
   position: absolute;
 }
 
-.btn-again {
-  padding: 12px 36px;
-  background: #15d3e6;
-  color: white;
-  font-weight: 400;
-  letter-spacing: 1px;
-  font-size: 15px;
-}
+
+/*
+ * 圆环中划对号的动画
+ */
 
 @keyframes checkmark {
   0% {
@@ -366,4 +327,25 @@ h4 {
     width: 28px;
     opacity: 1;
   }
+}
+
+
+/* 划对号结束时隐藏圆环的动画 */
+
+.load-complete {
+  -webkit-animation: none;
+  animation: none;
+  border: 4px solid rgba(208, 232, 221, 0.88);
+}
+
+
+/* 再玩一次按钮 */
+
+.btn-again {
+  padding: 12px 36px;
+  background: #15d3e6;
+  color: white;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 15px;
 }
