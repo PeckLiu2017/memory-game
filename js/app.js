@@ -111,17 +111,17 @@ $(document).ready(function() {
 
   /**
    * @description 游戏结束根据游戏用时计算星级成绩
-   * 用时低于 15 秒得 3 星,记分板显示三颗实心星
-   * 大于 15 秒小于等于 30 秒得 2 星,记分板第三颗实心星被替换为空心星
-   * 大于 30 秒得一星,记分板第三颗和第二颗实心星都被替换为空心星
+   * 用时低于 30 秒得 3 星,记分板显示三颗实心星
+   * 大于 30 秒小于等于 45 秒得 2 星,记分板第三颗实心星被替换为空心星
+   * 大于 60 秒得一星,记分板第三颗和第二颗实心星都被替换为空心星
    */
   function getStar(second) {
-    if (second > 0 && second <= 15) {
+    if (second > 0 && second <= 30) {
       $('#final-stars').text('3');
-    } else if (second > 15 && second <= 30) {
+    } else if (second > 30 && second <= 45) {
       $('#final-stars').text('2');
       $('.stars').children('li').eq(2).children('i').attr('class', 'fa fa-star-o');
-    } else if (second > 30) {
+    } else if (second > 60) {
       $('#final-stars').text('1');
       $('.stars').children('li').eq(2).children('i').attr('class', 'fa fa-star-o');
       $('.stars').children('li').eq(1).children('i').attr('class', 'fa fa-star-o');
